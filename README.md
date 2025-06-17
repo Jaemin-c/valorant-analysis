@@ -1,5 +1,5 @@
 # valorant-analysis
-Welcome! This project compares Radiant and Immortal players in Valorant using data analysis.
+Jaemin Chung - jaeminc@umich.edu
 
 ## Step 1: Introduction
 
@@ -15,10 +15,10 @@ This question is relevant because it addresses what it really takes to become on
 
 ---
 
-### 📊 About the Dataset
+### About the Dataset
 
 - **Dataset size**: 85,574 rows  
-- **Source**: A scraped dataset of Radiant and Immortal-ranked players and their match statistics.
+- **Source**: A scraped dataset of Radiant and Immortal-ranked players and their match statistics.(Kaggle)
 
 ### 🔍 Relevant Columns Used:
 
@@ -35,3 +35,34 @@ This question is relevant because it addresses what it really takes to become on
 | `agent_1`       | The agent most commonly played by the user. |
 
 We focus our analysis on these columns to explore which gameplay stats most strongly correlate with Radiant-level success, and whether some Immortals show Radiant-like characteristics.
+
+
+
+
+## Step 3: Problem Identification
+
+For this project, we aim to build a **predictive classification model** that distinguishes between **Radiant** and **Immortal** players in *Valorant* based on their in-game performance statistics.
+
+### 🎯 Prediction Problem  
+**Can we predict whether a player is Radiant or Immortal based on their in-game stats such as KD ratio, win percentage, and damage per round?**
+
+This is a **binary classification** task, where the response variable is:
+
+- `rating` — a categorical variable with two classes: `"Radiant"` and `"Immortal"` (merged from Immortal 1, 2, and 3 for simplicity).
+
+We chose this problem because reaching Radiant rank is extremely competitive, and identifying what makes Radiant players stand out can offer insights to aspiring high-rank players or coaches.
+
+### 📊 Response Variable  
+- **Response**: `rating`  
+- **Type**: Categorical (Binary: Radiant vs. Immortal)
+
+This was chosen because our broader research question is:  
+**“What differentiates Radiants from Immortals in terms of in-game performance stats?”**
+
+By modeling this as a classification problem, we can both **predict rank tier** and **gain insight into feature importance**.
+
+### 📐 Model Type: Predictive or Inferential  
+This is a **predictive model**, not inferential. Our goal is to **accurately predict a player's rank tier**, not necessarily to interpret causal relationships between the features and the rank. The input features we use (e.g., win percentage, clutch counts, KD ratio) are **realistically known before** a rank is assigned or changed — thus they are suitable for prediction.
+
+### ✅ Evaluation Metric  
+We will evaluate model performance using **F1-Score**, as our classes may be imbalanced (e.g., fewer Radiants than Immortals). F1-score is preferred over accuracy in this context because it balances both **precision** and **recall**, giving a better sense of model performance when one class is harder to predict correctly.
