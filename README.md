@@ -100,7 +100,12 @@ df['rating_group'] = df['rating'].replace({
 
 This allowed us to simplify comparisons and focus the model on the key question: what distinguishes Radiants from Immortals?
 
-<iframe src="assets/cleaned_table.html" width="100%" height="400" frameborder="0"></iframe>
+<iframe
+ src="/Users/jaeminchung/valorant-analysis/assets/cleaned_table.html/cleaned_table.html"
+ width="100%"
+ height="400"
+ frameborder="0">
+</iframe>
 
 
 ## Step 3: Problem Identification
