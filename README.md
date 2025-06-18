@@ -37,11 +37,11 @@ This question is relevant because it addresses what it really takes to become on
 We focus our analysis on these columns to explore which gameplay stats most strongly correlate with Radiant-level success, and whether some Immortals show Radiant-like characteristics.
 
 
-## Step 2: Data Cleaning
+## Step 2: Data Cleaning and Exploratory Data Analysis
 
 To ensure consistent and reliable analysis, we cleaned the raw `val_stats.csv` dataset through the following steps:
 
-### 🔧 1. Parsing Numerical Columns
+### 1. Parsing Numerical Columns
 
 Several numeric features were stored as strings or had missing/invalid values. We used `pd.to_numeric(..., errors='coerce')` to convert these columns safely to numeric values, coercing invalid entries to `NaN`. The columns processed include:
 
@@ -100,6 +100,7 @@ df['rating_group'] = df['rating'].replace({
 
 This allowed us to simplify comparisons and focus the model on the key question: what distinguishes Radiants from Immortals?
 
+<div style="overflow-x: auto;">
 | region   | name          | tag    | rating   |   damage_round |   headshots |   headshot_percent |   aces |   clutches |   flawless |   first_bloods | kills   | deaths   |   assists |   kd_ratio |   kills_round |   most_kills |   score_round |   wins |   win_percent | agent_1   | agent_2   | agent_3   | gun1_name   |   gun1_head |   gun1_body |   gun1_legs |   gun1_kills | gun2_name   |   gun2_head |   gun2_body |   gun2_legs |   gun2_kills | gun3_name   |   gun3_head |   gun3_body |   gun3_legs |   gun3_kills | rating_group   |
 |:---------|:--------------|:-------|:---------|---------------:|------------:|-------------------:|-------:|-----------:|-----------:|---------------:|:--------|:---------|----------:|-----------:|--------------:|-------------:|--------------:|-------:|--------------:|:----------|:----------|:----------|:------------|------------:|------------:|------------:|-------------:|:------------|------------:|------------:|------------:|-------------:|:------------|------------:|------------:|------------:|-------------:|:---------------|
 | NA       | ShimmyXD      | #NA1   | Radiant  |          135.8 |         992 |               24.9 |      0 |        140 |         80 |            161 | 1,506   | 1,408    |       703 |       1.07 |           0.7 |           29 |         208.8 |     59 |          59.6 | Fade      | Viper     | Omen      | Vandal      |          35 |          59 |           5 |          802 | Phantom     |          33 |          62 |           5 |          220 | Classic     |          36 |          60 |           3 |          147 | Radiant        |
@@ -107,7 +108,7 @@ This allowed us to simplify comparisons and focus the model on the key question:
 | NA       | PuRelittleone | #yoruW | Radiant  |          147.5 |         720 |               24   |      3 |        117 |         59 |            216 | 1,115   | 1,064    |       267 |       1.05 |           0.8 |           39 |         227.8 |     42 |          65.6 | Yoru      | Jett      | Chamber   | Vandal      |          38 |          57 |           4 |          444 | Phantom     |          36 |          61 |           3 |          231 | Operator    |           8 |          91 |           1 |          102 | Radiant        |
 | NA       | Boba          | #0068  | Radiant  |          178.2 |         856 |               37.3 |      3 |         83 |         49 |            235 | 1,134   | 812      |       157 |       1.4  |           1   |           37 |         277   |     32 |          62.8 | Jett      | Chamber   | KAY/O     | Vandal      |          51 |          47 |           2 |          754 | Sheriff     |          48 |          51 |           1 |           48 | Phantom     |          44 |          56 |           0 |           36 | Radiant        |
 | NA       | i love mina   | #kelly | Radiant  |          149.8 |         534 |               24.4 |      2 |         71 |         38 |            137 | 869     | 781      |       213 |       1.11 |           0.8 |           29 |         230.9 |     32 |          62.8 | Jett      | Raze      | Chamber   | Vandal      |          36 |          60 |           4 |          419 | Spectre     |          21 |          71 |           8 |           65 | Operator    |           8 |          92 |           0 |           64 | Radiant        |
-
+</div>
 
 ## Step 3: Problem Identification
 
