@@ -119,7 +119,7 @@ In this section, we explore the distribution of key individual statistics to und
 
 #### Player Rank Distribution
 
-<iframe src="assets/rank_distribution.html" width="600" height="400" frameborder="0"></iframe>
+<iframe src="assets/rank_distribution_pie.html" width="600" height="400" frameborder="0"></iframe>
 
 Radiants are a much smaller portion of the population, highlighting class imbalance and the difficulty of reaching the top tier.
 
