@@ -36,11 +36,10 @@ This question is relevant because it addresses what it really takes to become on
 
 We focus our analysis on these columns to explore which gameplay stats most strongly correlate with Radiant-level success, and whether some Immortals show Radiant-like characteristics.
 
-
 ## Step 2: Data Cleaning and Exploratory Data Analysis
+To conduct a meaningful analysis and build a reliable model, we first needed to clean and understand our dataset. In this step, we performed both **data cleaning** to prepare the dataset for modeling, and **exploratory data analysis (EDA)** to uncover patterns and distributions in key variables.
 
-To ensure consistent and reliable analysis, we cleaned the raw `val_stats.csv` dataset through the following steps:
-
+### Part 1: Data Cleaning
 ### 1. Parsing Numerical Columns
 
 Several numeric features were stored as strings or had missing/invalid values. We used `pd.to_numeric(..., errors='coerce')` to convert these columns safely to numeric values, coercing invalid entries to `NaN`. The columns processed include:
@@ -66,7 +65,7 @@ df.dropna(subset=['kd_ratio', 'win_percent', 'damage_round', 'wins', 'clutches',
 
 This improved data quality and reliability across all statistical comparisons.
 
-### 🧍 3. Filling Missing Categorical Fields
+### 3. Filling Missing Categorical Fields
 
 Some non-numeric columns like player `name`, `tag`, and agent selections had blanks or missing values. We replaced these with the string `"Unknown"` to avoid errors in grouping and filtering.
 
@@ -112,6 +111,45 @@ We limited the preview table to only key performance-related columns to ensure c
 | NA       | Boba          | Radiant  |       1.4  |          62.8 |          178.2 |            235 |         83 | Jett      |
 | NA       | i love mina   | Radiant  |       1.11 |          62.8 |          149.8 |            137 |         71 | Jett      |
 
+---
+
+### Part 2: Univariate Analysis
+
+In this section, we explore the distribution of key individual statistics to understand how performance varies across all players in our dataset. These insights help identify which variables are most informative when comparing Radiants and Immortals.
+
+#### Player Rank Distribution
+
+<iframe src="assets/rank_distribution.html" width="600" height="400" frameborder="0"></iframe>
+
+Radiants are a much smaller portion of the population, highlighting class imbalance and the difficulty of reaching the top tier.
+
+#### Damage per Round
+
+<iframe src="assets/damage_per_round.html" width="700" height="400" frameborder="0"></iframe>
+
+Most players fall between 120 and 180 damage per round, with some outliers above 200 indicating highly impactful players.
+
+####  Kill-to-Death Ratio (K/D)
+
+<iframe src="assets/kd_ratio.html" width="700" height="400" frameborder="0"></iframe>
+
+The K/D ratio tends to center between 0.9 and 1.5. Understanding whether Radiants consistently hold higher K/Ds is key to our modeling.
+
+---
+
+### Part 3: Bivariate Analysis
+
+Here, we compare **two variables at a time** — especially how individual performance metrics differ across Radiants and Immortals.
+
+(예시: win_percent vs rating_group, clutches vs rating_group 등 그래프 삽입)
+
+---
+
+### Part 4: Interesting Aggregates
+
+This section dives into more nuanced group-level insights and comparisons that aren’t immediately visible from single-variable distributions.
+
+(예시: Radiants with highest win%, Immortals outperforming Radiants on certain metrics, etc.)
 
 
 ## Step 3: Problem Identification
