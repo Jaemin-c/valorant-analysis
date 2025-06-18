@@ -100,12 +100,18 @@ df['rating_group'] = df['rating'].replace({
 
 This allowed us to simplify comparisons and focus the model on the key question: what distinguishes Radiants from Immortals?
 
-<iframe
- src="/Users/jaeminchung/valorant-analysis/assets/cleaned_table.html/cleaned_table.html"
- width="100%"
- height="400"
- frameborder="0">
-</iframe>
+
+We limited the preview table to only key performance-related columns to ensure clarity and focus. The original dataset contains over 30 columns, but for exploratory and modeling purposes, we highlight only the most relevant metrics — such as kill-death ratio, win rate, and clutch counts — that align with our guiding question.
+
+
+| region   | name          | rating   |   kd_ratio |   win_percent |   damage_round |   first_bloods |   clutches | agent_1   |
+|:---------|:--------------|:---------|-----------:|--------------:|---------------:|---------------:|-----------:|:----------|
+| NA       | ShimmyXD      | Radiant  |       1.07 |          59.6 |          135.8 |            161 |        140 | Fade      |
+| NA       | XSET Cryo     | Radiant  |       1.35 |          65.8 |          170.3 |            316 |        122 | Chamber   |
+| NA       | PuRelittleone | Radiant  |       1.05 |          65.6 |          147.5 |            216 |        117 | Yoru      |
+| NA       | Boba          | Radiant  |       1.4  |          62.8 |          178.2 |            235 |         83 | Jett      |
+| NA       | i love mina   | Radiant  |       1.11 |          62.8 |          149.8 |            137 |         71 | Jett      |
+
 
 
 ## Step 3: Problem Identification
