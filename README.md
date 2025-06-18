@@ -125,7 +125,7 @@ Radiants are a much smaller portion of the population, highlighting class imbala
 
 #### Damage per Round
 
-<iframe src="assets/damage_per_round.html" width="700" height="400" frameborder="0"></iframe>
+<iframe src="assets/dpr.html" width="700" height="400" frameborder="0"></iframe>
 
 Most players fall between 120 and 180 damage per round, with some outliers above 200 indicating highly impactful players.
 
