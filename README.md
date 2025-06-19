@@ -177,7 +177,7 @@ Radiant players, on average, secured significantly more **clutch wins** and **fi
 
 ### 2. KD Ratio vs. Win Percentage (Radiants Only)
 
-<iframe src="assets/rafig_kdandwin.html" width="800" height="500" frameborder="0"></iframe>
+<iframe src="assets/kdandwin.html" width="800" height="500" frameborder="0"></iframe>
 
 Among Radiant players, we observe a **positive linear trend** between **K/D ratio** and **win percentage**, reinforcing that individual fragging efficiency is closely tied to winning. While K/D isn't the sole determinant of success, it clearly plays a strong role among top-tier players.
 
@@ -185,7 +185,7 @@ Among Radiant players, we observe a **positive linear trend** between **K/D rati
 
 ### 3. Damage per Round vs. Win Percentage (All Ranks)
 
-<iframe src="assets/fig_dprandwin.html" width="800" height="500" frameborder="0"></iframe>
+<iframe src="assets/dprandwin.html" width="800" height="500" frameborder="0"></iframe>
 
 Across both Radiants and Immortals, we again see a **positive correlation** between **damage dealt per round** and **overall win rate**. Although the data is noisier at lower damage levels, players with consistently high damage output tend to contribute more to match wins. This confirms damage per round as one of the key performance metrics that separates Radiants from Immortals.
 
