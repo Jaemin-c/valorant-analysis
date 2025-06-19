@@ -275,3 +275,61 @@ While this logistic regression model is relatively simple, it provides a solid f
 
 
 
+## Step 5: Final Model
+
+### Feature Selection and Engineering
+
+For our final model, we added the following features and applied transformations:
+
+- **`clutches`** (Quantitative): Represents how often a player wins a round as the last surviving member. This is likely a strong signal of individual impact in high-pressure situations, particularly at higher ranks.
+- **`agent_1`** (Nominal): The most commonly played agent by the player. Some agents have a greater potential to carry rounds (e.g., Jett, Reyna) or support teams in impactful ways (e.g., Skye, Sova), which may correlate with rank.
+
+To prepare the data:
+- We applied `StandardScaler` + `QuantileTransformer` to all quantitative features (`kd_ratio`, `damage_round`, `clutches`) to normalize skewed distributions and make the model less sensitive to outliers.
+- We one-hot encoded `agent_1` to convert this categorical variable into usable binary features.
+
+These transformations were applied **inside a single sklearn `Pipeline`** to ensure compatibility with new data and simplify the training process.
+
+---
+
+### Modeling Algorithm and Tuning
+
+We used **Logistic Regression** as our final modeling algorithm. This choice provides interpretable results and performs well with transformed numeric and categorical inputs.
+
+To handle the class imbalance between Radiant and Immortal players, we applied **class weighting** using `compute_class_weight`. This gave more importance to the minority Radiant class.
+
+We performed hyperparameter tuning using **`GridSearchCV` with 5-fold cross-validation**, optimizing for **macro F1-score**. The hyperparameter grid was:
+
+clf__C: [0.01, 0.1, 1, 10, 100]
+
+
+
+The best-performing model used:
+- `C = 0.1`
+
+---
+
+### Model Performance and Improvement
+
+Below is the classification report for the final model:
+
+=== Final Model Classification Report ===
+```
+              precision    recall  f1-score   support
+
+    Immortal       0.99      0.73      0.84     16594
+     Radiant       0.08      0.78      0.15       521
+
+    accuracy                           0.74     17115
+   macro avg       0.54      0.76      0.50     17115
+weighted avg       0.96      0.74      0.82     17115
+
+```
+
+
+Compared to the baseline model, the final model significantly improved:
+- **Recall for Radiant** (0.00 → 0.78): The model now identifies most Radiant players correctly.
+- **F1-score for Radiant** (0.01 → 0.15): Substantial improvement in predictive value for the minority class.
+- **Macro F1** (0.50 → 0.50): Maintained but with more balanced class performance.
+
+This shows that the final model is much better at distinguishing Radiant players from Immortals, particularly due to the engineered features and class weighting strategy.
