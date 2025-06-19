@@ -253,15 +253,19 @@ We split the dataset using an 80/20 train-test split and used stratification to 
 
 Below is the classification report from the baseline model:
 
-=== Final Model Classification Report ===
+=== Classification Report ===
+```
               precision    recall  f1-score   support
 
-    Immortal       0.99      0.73      0.84     16594
-     Radiant       0.08      0.78      0.15       521
+    Immortal       0.97      1.00      0.98     16594
+     Radiant       0.10      0.00      0.01       521
 
-    accuracy                           0.74     17115
-   macro avg       0.54      0.76      0.50     17115
-weighted avg       0.96      0.74      0.82     17115
+    accuracy                           0.97     17115
+   macro avg       0.53      0.50      0.50     17115
+weighted avg       0.94      0.97      0.95     17115
+
+```
+
 
 
 
