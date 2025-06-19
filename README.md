@@ -5,7 +5,7 @@ Jaemin Chung - jaeminc@umich.edu
 
 Valorant is a competitive tactical shooter where ranking up is the core goal for many players. At the very top of the ladder, **Radiant** players represent the top 0.1%, while **Immortal** ranks (Immortal 1–3) make up the highly skilled tier just below. Understanding the differences between these two groups is useful for both competitive players and analysts: it sheds light on what performance truly separates the best from the nearly best.
 
-Our project aims to answer the following question:
+My project aims to answer the following question:
 
 > **Among Radiant and Immortal players, what differentiates Radiants from Immortals in terms of in-game performance stats?**
 
@@ -218,3 +218,56 @@ This is a **predictive model**, not inferential. Our goal is to **accurately pre
 
 ### Evaluation Metric  
 We will evaluate model performance using **F1-Score**, as our classes may be imbalanced (e.g., fewer Radiants than Immortals). F1-score is preferred over accuracy in this context because it balances both **precision** and **recall**, giving a better sense of model performance when one class is harder to predict correctly.
+
+
+## Step 4: Baseline Model
+
+To establish a performance benchmark, we trained a baseline classification model using logistic regression. The goal of the model is to predict whether a player belongs to the **Radiant** or **Immortal** tier based on their gameplay statistics.
+
+### Model Overview
+
+- **Model Used**: Logistic Regression (via scikit-learn)
+- **Preprocessing**: Standardized numeric features using `StandardScaler`
+- **Pipeline**: Implemented using `sklearn.pipeline.Pipeline` to streamline scaling and modeling
+- **Target**: `rating_group` (binary: Radiant vs. Immortal)
+
+### Features Used
+
+We selected three core performance features:
+
+| Feature         | Type         | Description |
+|----------------|--------------|-------------|
+| `kd_ratio`      | Quantitative | Kill-to-death ratio |
+| `damage_round`  | Quantitative | Average damage dealt per round |
+| `clutches`      | Quantitative | Number of clutch rounds won |
+
+- **Quantitative Features**: 3  
+- **Ordinal Features**: 0  
+- **Nominal Features**: 0  
+
+Since all selected features were numerical, no categorical encodings were necessary for this baseline model.
+
+### Evaluation
+
+We split the dataset using an 80/20 train-test split and used stratification to maintain class distribution. The model's performance was evaluated using precision, recall, and F1-score.
+
+Below is the classification report from the baseline model:
+
+=== Final Model Classification Report ===
+              precision    recall  f1-score   support
+
+    Immortal       0.99      0.73      0.84     16594
+     Radiant       0.08      0.78      0.15       521
+
+    accuracy                           0.74     17115
+   macro avg       0.54      0.76      0.50     17115
+weighted avg       0.96      0.74      0.82     17115
+
+
+
+### Model Assessment
+
+While this logistic regression model is relatively simple, it provides a solid foundation for comparison. It captures some performance-based differences between Radiants and Immortals but likely misses complex nonlinear interactions or interactions involving other metrics. Therefore, we view this as a **good baseline**, but **not sufficient for high predictive accuracy**. It serves as a point of comparison for future improvements in the final model.
+
+
+
