@@ -20,7 +20,7 @@ This question is relevant because it addresses what it really takes to become on
 - **Dataset size**: 85,574 rows  
 - **Source**: A scraped dataset of Radiant and Immortal-ranked players and their match statistics.(Kaggle)
 
-### 🔍 Relevant Columns Used:
+### Relevant Columns Used:
 
 | Column Name     | Description |
 |-----------------|-------------|
@@ -139,7 +139,7 @@ The K/D ratio tends to center between 0.9 and 1.5. Understanding whether Radiant
 
 ---
 
-### 📊 Part 3: Bivariate Analysis
+### Part 3: Bivariate Analysis
 
 To explore how in-game stats distinguish Radiants from Immortals, we visualized two key metrics — **Clutches** and **Damage per Round** — across rank tiers using box plots. These comparisons help us identify which performance traits are more common among Radiant players.
 
@@ -152,7 +152,7 @@ This plot displays the number of **clutch rounds** (rounds won as the last survi
 **Interpretation:**  
 Clutch performance appears to be a key differentiator between Radiants and Immortals. This supports the hypothesis that Radiants excel not just in raw stats but in clutch moments that secure rounds and shift momentum.
 
-#### 🔸 Damage per Round by Rating Tier
+#### Damage per Round by Rating Tier
 
 This box plot compares the **damage dealt per round** across rating groups. While all tiers center around similar median values, Radiant players display **fewer low outliers and a tighter IQR**, suggesting they maintain **more consistent impact per round**.
 
@@ -163,11 +163,32 @@ Consistency in damage output — not just high peaks — may be a distinguishing
 
 ---
 
-### Part 4: Interesting Aggregates
+## Part 4: Interesting Aggregates
 
-This section dives into more nuanced group-level insights and comparisons that aren’t immediately visible from single-variable distributions.
+To dig deeper into what distinguishes Radiants from Immortals, we used grouped aggregates and correlation visualizations that summarize player behavior across multiple features.
 
-(예시: Radiants with highest win%, Immortals outperforming Radiants on certain metrics, etc.)
+### 1. Average Clutches and First Bloods by Rating Group
+
+<iframe src="assets/avgclutch.html" width="800" height="500" frameborder="0"></iframe>
+
+Radiant players, on average, secured significantly more **clutch wins** and **first bloods** than Immortals. This suggests that not only are Radiants more effective in high-pressure solo situations, but they also frequently initiate rounds with early picks — both being strong indicators of impactful play.
+
+---
+
+### 2. KD Ratio vs. Win Percentage (Radiants Only)
+
+<iframe src="assets/rafig_kdandwin.html" width="800" height="500" frameborder="0"></iframe>
+
+Among Radiant players, we observe a **positive linear trend** between **K/D ratio** and **win percentage**, reinforcing that individual fragging efficiency is closely tied to winning. While K/D isn't the sole determinant of success, it clearly plays a strong role among top-tier players.
+
+---
+
+### 3. Damage per Round vs. Win Percentage (All Ranks)
+
+<iframe src="assets/fig_dprandwin.html" width="800" height="500" frameborder="0"></iframe>
+
+Across both Radiants and Immortals, we again see a **positive correlation** between **damage dealt per round** and **overall win rate**. Although the data is noisier at lower damage levels, players with consistently high damage output tend to contribute more to match wins. This confirms damage per round as one of the key performance metrics that separates Radiants from Immortals.
+
 
 
 ## Step 3: Problem Identification
