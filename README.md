@@ -137,11 +137,26 @@ The K/D ratio tends to center between 0.9 and 1.5. Understanding whether Radiant
 
 ---
 
+---
+
 ### Part 3: Bivariate Analysis
 
-Here, we compare **two variables at a time** — especially how individual performance metrics differ across Radiants and Immortals.
+To investigate how different stats relate to ranking tier, we visualized key performance metrics across ranks using **box plots**. These help us see distributions and outliers in context.
 
-(예시: win_percent vs rating_group, clutches vs rating_group 등 그래프 삽입)
+#### Clutches by Rating Tier
+
+The plot below compares the number of **clutch rounds** across Radiant and Immortal players. We observe that Radiants tend to have a **higher median clutch count** and more consistent high outliers, suggesting better performance in high-pressure rounds.
+
+<iframe src="assets/clutches_by_rank.html" width="800" height="600" frameborder="0"></iframe>
+
+#### Damage per Round by Rating Tier
+
+This box plot shows the distribution of **damage per round** for each rank tier. While median values are similar across tiers, **Radiant players show fewer low outliers** and have a tighter interquartile range, suggesting more consistently high impact during matches.
+
+<iframe src="assets/damagecomp.html" width="800" height="600" frameborder="0"></iframe>
+
+
+
 
 ---
 
