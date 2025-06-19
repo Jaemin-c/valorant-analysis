@@ -139,24 +139,27 @@ The K/D ratio tends to center between 0.9 and 1.5. Understanding whether Radiant
 
 ---
 
-### Part 3: Bivariate Analysis
+### 📊 Part 3: Bivariate Analysis
 
-To investigate how different stats relate to ranking tier, we visualized key performance metrics across ranks using **box plots**. These help us see distributions and outliers in context.
+To explore how in-game stats distinguish Radiants from Immortals, we visualized two key metrics — **Clutches** and **Damage per Round** — across rank tiers using box plots. These comparisons help us identify which performance traits are more common among Radiant players.
 
 #### Clutches by Rating Tier
 
-The plot below compares the number of **clutch rounds** across Radiant and Immortal players. We observe that Radiants tend to have a **higher median clutch count** and more consistent high outliers, suggesting better performance in high-pressure rounds.
+This plot displays the number of **clutch rounds** (rounds won as the last surviving player) across each rank. Radiant players show a noticeably **higher median clutch count** compared to Immortals, along with a dense concentration of high outliers. This suggests that Radiants are more reliable in high-pressure 1vX situations — a skill likely rewarded at the highest rank.
 
 <iframe src="assets/clutches_by_rank.html" width="800" height="600" frameborder="0"></iframe>
 
-#### Damage per Round by Rating Tier
+**Interpretation:**  
+Clutch performance appears to be a key differentiator between Radiants and Immortals. This supports the hypothesis that Radiants excel not just in raw stats but in clutch moments that secure rounds and shift momentum.
 
-This box plot shows the distribution of **damage per round** for each rank tier. While median values are similar across tiers, **Radiant players show fewer low outliers** and have a tighter interquartile range, suggesting more consistently high impact during matches.
+#### 🔸 Damage per Round by Rating Tier
+
+This box plot compares the **damage dealt per round** across rating groups. While all tiers center around similar median values, Radiant players display **fewer low outliers and a tighter IQR**, suggesting they maintain **more consistent impact per round**.
 
 <iframe src="assets/damagecomp.html" width="800" height="600" frameborder="0"></iframe>
 
-
-
+**Interpretation:**  
+Consistency in damage output — not just high peaks — may be a distinguishing factor for Radiants. The lack of low-damage games indicates that Radiants maintain a higher baseline of performance, which likely contributes to their overall win rates and reliability.
 
 ---
 
