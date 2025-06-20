@@ -1,9 +1,11 @@
-# valorant-analysis
+# What differentiates Radiants from Immortals in terms of in-game performance stats?
 Jaemin Chung - jaeminc@umich.edu
 
 ## Step 1: Introduction
+As a passionate Valorant player, I’ve always been curious about what truly sets apart Radiants — the top 0.1% of players — from the rest of the Immortal ranks. Everyone in Immortal is undeniably skilled, but reaching Radiant seems to require something more.
 
 Valorant is a competitive tactical shooter where ranking up is the core goal for many players. At the very top of the ladder, **Radiant** players represent the top 0.1%, while **Immortal** ranks (Immortal 1–3) make up the highly skilled tier just below. Understanding the differences between these two groups is useful for both competitive players and analysts: it sheds light on what performance truly separates the best from the nearly best.
+
 
 My project aims to answer the following question:
 
@@ -103,13 +105,13 @@ This allowed us to simplify comparisons and focus the model on the key question:
 We limited the preview table to only key performance-related columns to ensure clarity and focus. The original dataset contains over 30 columns, but for exploratory and modeling purposes, we highlight only the most relevant metrics — such as kill-death ratio, win rate, and clutch counts — that align with our guiding question.
 
 
-| region   | name          | rating   |   kd_ratio |   win_percent |   damage_round |   first_bloods |   clutches | agent_1   |
-|:---------|:--------------|:---------|-----------:|--------------:|---------------:|---------------:|-----------:|:----------|
-| NA       | ShimmyXD      | Radiant  |       1.07 |          59.6 |          135.8 |            161 |        140 | Fade      |
-| NA       | XSET Cryo     | Radiant  |       1.35 |          65.8 |          170.3 |            316 |        122 | Chamber   |
-| NA       | PuRelittleone | Radiant  |       1.05 |          65.6 |          147.5 |            216 |        117 | Yoru      |
-| NA       | Boba          | Radiant  |       1.4  |          62.8 |          178.2 |            235 |         83 | Jett      |
-| NA       | i love mina   | Radiant  |       1.11 |          62.8 |          149.8 |            137 |         71 | Jett      |
+| region   | name          | tag    | rating   |   damage_round |   headshots |   headshot_percent |   aces |   clutches |   flawless |   first_bloods | kills   | deaths   |   assists |   kd_ratio |   kills_round |   most_kills |   score_round |   wins |   win_percent | agent_1   | agent_2   | agent_3   | gun1_name   |   gun1_head |   gun1_body |   gun1_legs |   gun1_kills | gun2_name   |   gun2_head |   gun2_body |   gun2_legs |   gun2_kills | gun3_name   |   gun3_head |   gun3_body |   gun3_legs |   gun3_kills | rating_group   |
+|:---------|:--------------|:-------|:---------|---------------:|------------:|-------------------:|-------:|-----------:|-----------:|---------------:|:--------|:---------|----------:|-----------:|--------------:|-------------:|--------------:|-------:|--------------:|:----------|:----------|:----------|:------------|------------:|------------:|------------:|-------------:|:------------|------------:|------------:|------------:|-------------:|:------------|------------:|------------:|------------:|-------------:|:---------------|
+| NA       | ShimmyXD      | #NA1   | Radiant  |          135.8 |         992 |               24.9 |      0 |        140 |         80 |            161 | 1,506   | 1,408    |       703 |       1.07 |           0.7 |           29 |         208.8 |     59 |          59.6 | Fade      | Viper     | Omen      | Vandal      |          35 |          59 |           5 |          802 | Phantom     |          33 |          62 |           5 |          220 | Classic     |          36 |          60 |           3 |          147 | Radiant        |
+| NA       | XSET Cryo     | #cells | Radiant  |          170.3 |         879 |               28.3 |      2 |        122 |         94 |            316 | 1,608   | 1,187    |       206 |       1.35 |           1   |           32 |         270.6 |     52 |          65.8 | Chamber   | Jett      | Raze      | Vandal      |          41 |          56 |           3 |          689 | Operator    |           8 |          91 |           0 |          226 | Phantom     |          32 |          63 |           5 |          137 | Radiant        |
+| NA       | PuRelittleone | #yoruW | Radiant  |          147.5 |         720 |               24   |      3 |        117 |         59 |            216 | 1,115   | 1,064    |       267 |       1.05 |           0.8 |           39 |         227.8 |     42 |          65.6 | Yoru      | Jett      | Chamber   | Vandal      |          38 |          57 |           4 |          444 | Phantom     |          36 |          61 |           3 |          231 | Operator    |           8 |          91 |           1 |          102 | Radiant        |
+| NA       | Boba          | #0068  | Radiant  |          178.2 |         856 |               37.3 |      3 |         83 |         49 |            235 | 1,134   | 812      |       157 |       1.4  |           1   |           37 |         277   |     32 |          62.8 | Jett      | Chamber   | KAY/O     | Vandal      |          51 |          47 |           2 |          754 | Sheriff     |          48 |          51 |           1 |           48 | Phantom     |          44 |          56 |           0 |           36 | Radiant        |
+| NA       | i love mina   | #kelly | Radiant  |          149.8 |         534 |               24.4 |      2 |         71 |         38 |            137 | 869     | 781      |       213 |       1.11 |           0.8 |           29 |         230.9 |     32 |          62.8 | Jett      | Raze      | Chamber   | Vandal      |          36 |          60 |           4 |          419 | Spectre     |          21 |          71 |           8 |           65 | Operator    |           8 |          92 |           0 |           64 | Radiant        |
 
 ---
 
@@ -147,7 +149,7 @@ To explore how in-game stats distinguish Radiants from Immortals, we visualized 
 
 This plot displays the number of **clutch rounds** (rounds won as the last surviving player) across each rank. Radiant players show a noticeably **higher median clutch count** compared to Immortals, along with a dense concentration of high outliers. This suggests that Radiants are more reliable in high-pressure 1vX situations — a skill likely rewarded at the highest rank.
 
-<iframe src="assets/clutches_by_rank.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="assets/clutches_by_rank.html" width="800" height="400" frameborder="0"></iframe>
 
 **Interpretation:**  
 Clutch performance appears to be a key differentiator between Radiants and Immortals. This supports the hypothesis that Radiants excel not just in raw stats but in clutch moments that secure rounds and shift momentum.
@@ -156,7 +158,7 @@ Clutch performance appears to be a key differentiator between Radiants and Immor
 
 This box plot compares the **damage dealt per round** across rating groups. While all tiers center around similar median values, Radiant players display **fewer low outliers and a tighter IQR**, suggesting they maintain **more consistent impact per round**.
 
-<iframe src="assets/damagecomp.html" width="800" height="600" frameborder="0"></iframe>
+<iframe src="assets/damagecomp.html" width="800" height="400" frameborder="0"></iframe>
 
 **Interpretation:**  
 Consistency in damage output — not just high peaks — may be a distinguishing factor for Radiants. The lack of low-damage games indicates that Radiants maintain a higher baseline of performance, which likely contributes to their overall win rates and reliability.
@@ -169,7 +171,7 @@ To dig deeper into what distinguishes Radiants from Immortals, we used grouped a
 
 ### 1. Average Clutches and First Bloods by Rating Group
 
-<iframe src="assets/avgclutch.html" width="800" height="500" frameborder="0"></iframe>
+<iframe src="assets/avgclutch.html" width="800" height="400" frameborder="0"></iframe>
 
 Radiant players, on average, secured significantly more **clutch wins** and **first bloods** than Immortals. This suggests that not only are Radiants more effective in high-pressure solo situations, but they also frequently initiate rounds with early picks — both being strong indicators of impactful play.
 
@@ -177,7 +179,7 @@ Radiant players, on average, secured significantly more **clutch wins** and **fi
 
 ### 2. KD Ratio vs. Win Percentage (Radiants Only)
 
-<iframe src="assets/kdandwin.html" width="800" height="500" frameborder="0"></iframe>
+<iframe src="assets/kdandwin.html" width="800" height="400" frameborder="0"></iframe>
 
 Among Radiant players, we observe a **positive linear trend** between **K/D ratio** and **win percentage**, reinforcing that individual fragging efficiency is closely tied to winning. While K/D isn't the sole determinant of success, it clearly plays a strong role among top-tier players.
 
@@ -185,7 +187,7 @@ Among Radiant players, we observe a **positive linear trend** between **K/D rati
 
 ### 3. Damage per Round vs. Win Percentage (All Ranks)
 
-<iframe src="assets/dprandwin.html" width="800" height="500" frameborder="0"></iframe>
+<iframe src="assets/dprandwin.html" width="800" height="400" frameborder="0"></iframe>
 
 Across both Radiants and Immortals, we again see a **positive correlation** between **damage dealt per round** and **overall win rate**. Although the data is noisier at lower damage levels, players with consistently high damage output tend to contribute more to match wins. This confirms damage per round as one of the key performance metrics that separates Radiants from Immortals.
 
@@ -269,6 +271,13 @@ weighted avg       0.94      0.97      0.95     17115
 ### Model Assessment
 
 This logistic regression model offers a simple and interpretable baseline. While it achieves high overall accuracy (due to the imbalance in class labels), it fails to effectively identify **Radiant** players — yielding zero recall and F1-score for that class. This demonstrates the need for more sophisticated feature engineering and class imbalance handling in our final model. Despite its limitations, this baseline serves as a useful point of reference for comparison.
+
+
+
+While the **overall accuracy is high (0.97)**, this result is misleading due to **severe class imbalance** — the model predicts nearly all samples as "Immortal." As a result, performance for the **Radiant** class is **extremely poor**, with **zero precision, recall, and F1-score**.
+
+#### Conclusion:
+We do **not consider this model “good”** despite its high accuracy. It fails to generalize to the minority class (Radiant players), which is critical for a fair and informative classifier. This motivates the need for feature engineering, class imbalance handling, and model tuning in our final model to improve overall balance and recall across both classes.
 
 
 
