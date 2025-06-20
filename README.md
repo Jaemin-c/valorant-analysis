@@ -345,3 +345,26 @@ This shows that the final model is much better at distinguishing Radiant players
 These features weren’t chosen simply because they boosted accuracy after the fact — they were selected based on their connection to gameplay mechanics that likely *cause* players to perform at a Radiant level. In other words, they reflect **latent skill expressions** (like clutch ability or agent specialization) that aren't directly visible through basic stats like K/D ratio.
 
 This confirms that the model wasn’t just overfitting or relying on statistical noise — it genuinely improved in distinguishing Radiants from Immortals by learning the real traits that separate them.
+
+## Conclusion
+
+Through this project, I set out to answer a focused question:  
+**"What differentiates Radiants from Immortals in terms of in-game performance stats?"**
+
+By exploring a dataset of over 85,000 high-ranked Valorant players, I was able to analyze key performance indicators, build predictive models, and interpret the traits that separate the top 0.1% of players (Radiants) from the rest of the Immortal tier.
+
+### Key Takeaways
+
+- **Radiants exhibit stronger consistency in performance**, particularly in metrics like K/D ratio and damage per round, with fewer low-outlier games.
+- **Clutch performance** — winning rounds as the last player alive — emerged as an impactful differentiator. This makes intuitive sense in the context of high-pressure ranked games, where individual decision-making is often decisive.
+- **Agent selection** also played a subtle but meaningful role. Radiants tended to favor high-impact agents like Jett or Reyna, suggesting a performance benefit tied to playstyle and role specialization.
+- The **baseline model** struggled to detect Radiants due to class imbalance and limited features.  
+- The **final model**, enhanced with feature engineering and class weighting, significantly improved recall and F1-score for Radiant players — showing it could generalize better to unseen data and detect top-tier performers more reliably.
+
+### Final Thoughts
+
+This analysis not only helped me better understand what it takes to reach Radiant in Valorant, but also gave me practical experience applying the full machine learning workflow: from data cleaning and EDA, to feature engineering, modeling, and evaluation.
+
+Ultimately, the traits that set Radiants apart aren’t just about raw aim — they’re about consistency, game impact, and role mastery. These are lessons both players and analysts can take forward when evaluating performance at the highest level of competitive play.
+
+---
