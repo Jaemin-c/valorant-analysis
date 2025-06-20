@@ -1,19 +1,16 @@
-# What differentiates Radiants from Immortals in terms of in-game performance stats?
+# What differentiates Radiants from Immortals?
 Jaemin Chung - jaeminc@umich.edu
 
 ## Step 1: Introduction
-As a passionate Valorant player, I’ve always been curious about what truly sets apart Radiants — the top 0.1% of players — from the rest of the Immortal ranks. Everyone in Immortal is undeniably skilled, but reaching Radiant seems to require something more.
+As a passionate Valorant player, I’ve always been curious about what truly sets apart **Radiants** — the top 0.1% of players — from the rest of the **Immortal** ranks. Everyone in Immortal is undeniably skilled, but reaching Radiant seems to require something more: a unique consistency, impact, or strategic edge that’s not immediately obvious from surface-level stats.
 
-Valorant is a competitive tactical shooter where ranking up is the core goal for many players. At the very top of the ladder, **Radiant** players represent the top 0.1%, while **Immortal** ranks (Immortal 1–3) make up the highly skilled tier just below. Understanding the differences between these two groups is useful for both competitive players and analysts: it sheds light on what performance truly separates the best from the nearly best.
+**Valorant** is a highly competitive tactical shooter where climbing the ranked ladder is central to the player experience. At the very top, Radiants represent the best of the best, while Immortal 1–3 ranks sit just beneath — still elite, but statistically more common. Understanding the differences between these two groups isn’t just a fun curiosity — it offers real insight for aspiring top players, coaches, and game analysts.
 
-
-My project aims to answer the following question:
+So, I wanted to answer a simple but powerful question:
 
 > **Among Radiant and Immortal players, what differentiates Radiants from Immortals in terms of in-game performance stats?**
 
-### Why This Question Matters
-
-This question is relevant because it addresses what it really takes to become one of the best players in Valorant. While many players might assume that K/D ratio is everything, our analysis explores whether other factors like team coordination, consistency, or early-round impact matter more. Competitive gamers, coaches, and game designers alike can benefit from a clearer understanding of what defines top-tier performance.
+This project explores that question through data — using match performance metrics like **K/D ratio**, **damage per round**, **clutch wins**, and more — to uncover which traits actually distinguish Radiants from their Immortal peers. The ultimate goal: to model and understand what it really takes to stand out at the highest levels of Valorant.
 
 ---
 
@@ -36,10 +33,11 @@ This question is relevant because it addresses what it really takes to become on
 | `rating`        | Player's actual rank (Radiant, Immortal 1/2/3). |
 | `agent_1`       | The agent most commonly played by the user. |
 
-We focus our analysis on these columns to explore which gameplay stats most strongly correlate with Radiant-level success, and whether some Immortals show Radiant-like characteristics.
+
+I chose to focus my analysis on these columns to explore which gameplay stats most strongly correlate with Radiant-level success — and to see whether some Immortal players might actually exhibit Radiant-like characteristics.
 
 ## Step 2: Data Cleaning and Exploratory Data Analysis
-To conduct a meaningful analysis and build a reliable model, we first needed to clean and understand our dataset. In this step, we performed both **data cleaning** to prepare the dataset for modeling, and **exploratory data analysis (EDA)** to uncover patterns and distributions in key variables.
+To conduct a meaningful analysis and build a reliable model, I first needed to clean and understand my dataset. In this step, I focused on both data cleaning — to prepare the dataset for modeling — and exploratory data analysis (EDA) to uncover patterns and distributions in the key variables I planned to use.
 
 ### Part 1: Data Cleaning
 ### 1. Parsing Numerical Columns
@@ -59,7 +57,7 @@ This step was necessary to prepare the features for aggregation, visualization, 
 
 ### 2. Dropping Incomplete Rows
 
-We removed rows with missing values in critical performance columns to ensure accuracy in later analysis.
+I removed rows with missing values in critical performance columns to ensure accuracy in later analysis.
 
 ```python
 df.dropna(subset=['kd_ratio', 'win_percent', 'damage_round', 'wins', 'clutches', 'flawless', 'first_bloods'], inplace=True)
@@ -69,7 +67,7 @@ This improved data quality and reliability across all statistical comparisons.
 
 ### 3. Filling Missing Categorical Fields
 
-Some non-numeric columns like player `name`, `tag`, and agent selections had blanks or missing values. We replaced these with the string `"Unknown"` to avoid errors in grouping and filtering.
+Some non-numeric columns like player `name`, `tag`, and agent selections had blanks or missing values. I replaced these with the string `"Unknown"` to avoid errors in grouping and filtering.
 
 ```python
 df['name'].replace(to_replace=['', np.nan], value='Unknown', inplace=True)
@@ -80,14 +78,14 @@ df['agent_3'].replace(to_replace=['', np.nan], value='Unknown', inplace=True)
 
 ### 4. Filtering for Relevant Ratings
 
-To focus our project on the difference between **Radiant** and **Immortal** players, we filtered the dataset to only include the following ratings:
+To focus our project on the difference between **Radiant** and **Immortal** players, I filtered the dataset to only include the following ratings:
 
 - Radiant
 - Immortal 1
 - Immortal 2
 - Immortal 3
 
-We then grouped all Immortal tiers together:
+Then grouped all Immortal tiers together:
 
 ```python
 df = df[df['rating'].isin(['Radiant', 'Immortal 1', 'Immortal 2', 'Immortal 3'])].copy()
@@ -102,8 +100,7 @@ df['rating_group'] = df['rating'].replace({
 This allowed us to simplify comparisons and focus the model on the key question: what distinguishes Radiants from Immortals?
 
 
-We limited the preview table to only key performance-related columns to ensure clarity and focus. The original dataset contains over 30 columns, but for exploratory and modeling purposes, we highlight only the most relevant metrics — such as kill-death ratio, win rate, and clutch counts — that align with our guiding question.
-
+I limited the preview table to only the key performance-related columns to keep things clear and focused. The original dataset contains over 30 columns, but for the sake of exploration and modeling, I chose to highlight only the most relevant metrics — like kill-death ratio, win rate, and clutch counts — that directly support my guiding question.
 
 | region   | name          | tag    | rating   |   damage_round |   headshots |   headshot_percent |   aces |   clutches |   flawless |   first_bloods | kills   | deaths   |   assists |   kd_ratio |   kills_round |   most_kills |   score_round |   wins |   win_percent | agent_1   | agent_2   | agent_3   | gun1_name   |   gun1_head |   gun1_body |   gun1_legs |   gun1_kills | gun2_name   |   gun2_head |   gun2_body |   gun2_legs |   gun2_kills | gun3_name   |   gun3_head |   gun3_body |   gun3_legs |   gun3_kills | rating_group   |
 |:---------|:--------------|:-------|:---------|---------------:|------------:|-------------------:|-------:|-----------:|-----------:|---------------:|:--------|:---------|----------:|-----------:|--------------:|-------------:|--------------:|-------:|--------------:|:----------|:----------|:----------|:------------|------------:|------------:|------------:|-------------:|:------------|------------:|------------:|------------:|-------------:|:------------|------------:|------------:|------------:|-------------:|:---------------|
@@ -117,25 +114,25 @@ We limited the preview table to only key performance-related columns to ensure c
 
 ### Part 2: Univariate Analysis
 
-In this section, we explore the distribution of key individual statistics to understand how performance varies across all players in our dataset. These insights help identify which variables are most informative when comparing Radiants and Immortals.
+In this section, I explored the distribution of key individual statistics to get a better sense of how performance varies across players in the dataset. These insights helped me figure out which variables are most useful when comparing Radiants and Immortals.
 
 #### Player Rank Distribution
 
 <iframe src="assets/rank_distribution_pie.html" width="600" height="400" frameborder="0"></iframe>
 
-Radiants are a much smaller portion of the population, highlighting class imbalance and the difficulty of reaching the top tier.
+This pie chart shows the distribution of players in the dataset across the Radiant and Immortal ranks. As expected, Radiants make up a very small fraction of the total population — confirming that our classification task involves a significant class imbalance. This imbalance has implications for model performance, as it makes it harder to correctly identify Radiants without additional strategies like class weighting or oversampling.
 
 #### Damage per Round
 
 <iframe src="assets/dpr.html" width="700" height="400" frameborder="0"></iframe>
 
-Most players fall between 120 and 180 damage per round, with some outliers above 200 indicating highly impactful players.
+Most players fall between 120 and 180 damage per round, with some outliers above 200 indicating highly impactful players. However, the long tail to the right — including players dealing over 200 damage per round — indicates the presence of exceptional outliers who likely have a massive impact in their matches. These high performers may be disproportionately Radiants, making this a potentially predictive feature.
 
 ####  Kill-to-Death Ratio (K/D)
 
 <iframe src="assets/kd_ratio.html" width="700" height="400" frameborder="0"></iframe>
 
-The K/D ratio tends to center between 0.9 and 1.5. Understanding whether Radiants consistently hold higher K/Ds is key to our modeling.
+The K/D ratio tends to center between 0.9 and 1.5. Understanding whether Radiants consistently hold higher K/Ds is key to our modeling. However, identifying whether Radiants consistently maintain a higher K/D than Immortals is a central goal of this project. If so, it would validate the idea that fragging power is a key factor that sets Radiants apart — though we also aim to investigate whether other metrics (like clutches or utility usage) matter just as much or more.
 
 ---
 
@@ -143,7 +140,7 @@ The K/D ratio tends to center between 0.9 and 1.5. Understanding whether Radiant
 
 ### Part 3: Bivariate Analysis
 
-To explore how in-game stats distinguish Radiants from Immortals, we visualized two key metrics — **Clutches** and **Damage per Round** — across rank tiers using box plots. These comparisons help us identify which performance traits are more common among Radiant players.
+To explore how in-game stats distinguish Radiants from Immortals, I visualized two key metrics — **Clutches** and **Damage per Round**. These comparisons help us identify which performance traits are more common among Radiant players.
 
 #### Clutches by Rating Tier
 
@@ -167,7 +164,7 @@ Consistency in damage output — not just high peaks — may be a distinguishing
 
 ## Part 4: Interesting Aggregates
 
-To dig deeper into what distinguishes Radiants from Immortals, we used grouped aggregates and correlation visualizations that summarize player behavior across multiple features.
+To dig deeper into what distinguishes Radiants from Immortals, I used grouped aggregates and correlation visualizations that summarize player behavior across multiple features.
 
 ### 1. Average Clutches and First Bloods by Rating Group
 
