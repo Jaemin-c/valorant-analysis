@@ -308,6 +308,7 @@ For consistency and interpretability, I continued using **Logistic Regression** 
 param_grid = {
     'clf__C': [0.01, 0.1, 1, 10, 100]
 }
+```
 
 The best-performing model used:
 - `C = 0.1`
@@ -337,18 +338,10 @@ Compared to the baseline model, the final model significantly improved:
 
 This shows that the final model is much better at distinguishing Radiant players from Immortals, particularly due to the engineered features and class weighting strategy.
 
-Compared to the baseline model, the final model showed clear improvements in identifying Radiant players — and these improvements can be attributed to specific choices rooted in the data-generating process of Valorant.
-
 - **`clutches`** were added because Radiant players often stand out not just in raw aim or stats, but in how they perform during high-pressure, 1vX situations. Clutch scenarios are common in high-ELO ranked games where coordination and mental resilience matter — so this feature reflects a skill that's rewarded more heavily at the Radiant level.
 
 - **`agent_1`** (most-played agent) reflects tactical flexibility and specialization. Radiants often lean toward agents that offer high carry potential or round-winning abilities (e.g., Jett, Reyna), whereas Immortal players might play a broader or more support-oriented pool. Including this feature allows the model to capture subtle correlations between agent preference and elite-level performance.
 
 These features weren’t chosen simply because they boosted accuracy after the fact — they were selected based on their connection to gameplay mechanics that likely *cause* players to perform at a Radiant level. In other words, they reflect **latent skill expressions** (like clutch ability or agent specialization) that aren't directly visible through basic stats like K/D ratio.
-
-Thanks to these engineered features and class weighting, the model became much better at recognizing true Radiants:
-
-- **Recall for Radiant** (0.00 → 0.78): The model now identifies most Radiant players correctly.
-- **F1-score for Radiant** (0.01 → 0.15): Substantial improvement in predictive value for the minority class.
-- **Macro F1** (0.50 → 0.50): Maintained, but with much more balanced class-level performance.
 
 This confirms that the model wasn’t just overfitting or relying on statistical noise — it genuinely improved in distinguishing Radiants from Immortals by learning the real traits that separate them.
