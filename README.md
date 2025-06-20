@@ -312,7 +312,6 @@ param_grid = {
 The best-performing model used:
 - `C = 0.1`
 
----
 
 ### Model Performance and Improvement
 
