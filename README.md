@@ -289,6 +289,8 @@ To improve upon the baseline model, I incorporated additional features that I be
 
 - **`agent_1`** (Nominal): This captures the agent most frequently played by the user. Certain agents like **Jett**, **Reyna**, or **Chamber** allow for more fragging potential and self-sufficiency, traits that can be crucial in climbing to Radiant. Conversely, Immortal players might rely on more utility-focused or flexible roles. Including this feature allows the model to learn subtle patterns related to playstyle and specialization.
 
+These features weren’t chosen simply because they boosted accuracy after the fact — they were selected based on their connection to gameplay mechanics that likely *cause* players to perform at a Radiant level. In other words, they reflect **latent skill expressions** (like clutch ability or agent specialization) that aren't directly visible through basic stats like K/D ratio.
+
 To preprocess these features:
 - I applied a combination of **`StandardScaler`** and **`QuantileTransformer`** to quantitative features (`kd_ratio`, `damage_round`, `clutches`) to reduce skew and make the model more robust to outliers.
 - I encoded `agent_1` using **`OneHotEncoder`** to handle the categorical nature of this variable.
@@ -337,12 +339,6 @@ Compared to the baseline model, the final model significantly improved:
 - **Macro F1** (0.50 → 0.50): Maintained but with more balanced class performance.
 
 This shows that the final model is much better at distinguishing Radiant players from Immortals, particularly due to the engineered features and class weighting strategy.
-
-- **`clutches`** were added because Radiant players often stand out not just in raw aim or stats, but in how they perform during high-pressure, 1vX situations. Clutch scenarios are common in high-ELO ranked games where coordination and mental resilience matter — so this feature reflects a skill that's rewarded more heavily at the Radiant level.
-
-- **`agent_1`** (most-played agent) reflects tactical flexibility and specialization. Radiants often lean toward agents that offer high carry potential or round-winning abilities (e.g., Jett, Reyna), whereas Immortal players might play a broader or more support-oriented pool. Including this feature allows the model to capture subtle correlations between agent preference and elite-level performance.
-
-These features weren’t chosen simply because they boosted accuracy after the fact — they were selected based on their connection to gameplay mechanics that likely *cause* players to perform at a Radiant level. In other words, they reflect **latent skill expressions** (like clutch ability or agent specialization) that aren't directly visible through basic stats like K/D ratio.
 
 This confirms that the model wasn’t just overfitting or relying on statistical noise — it genuinely improved in distinguishing Radiants from Immortals by learning the real traits that separate them.
 
