@@ -222,34 +222,33 @@ We will evaluate model performance using **F1-Score**, as our classes may be imb
 
 ## Step 4: Baseline Model
 
-To establish a performance benchmark, we trained a baseline classification model using logistic regression. The goal of the model is to predict whether a player belongs to the **Radiant** or **Immortal** tier based on their gameplay statistics.
+To establish a performance benchmark, we trained a baseline classification model using logistic regression. The objective of this model is to predict whether a player belongs to the **Radiant** or **Immortal** tier using core gameplay statistics.
 
 ### Model Overview
 
 - **Model Used**: Logistic Regression (via scikit-learn)
 - **Preprocessing**: Standardized numeric features using `StandardScaler`
-- **Pipeline**: Implemented using `sklearn.pipeline.Pipeline` to streamline scaling and modeling
+- **Pipeline**: Built using `sklearn.pipeline.Pipeline` to combine preprocessing and modeling
 - **Target**: `rating_group` (binary: Radiant vs. Immortal)
 
 ### Features Used
 
-We selected three core performance features:
+We selected two core quantitative features:
 
 | Feature         | Type         | Description |
 |----------------|--------------|-------------|
 | `kd_ratio`      | Quantitative | Kill-to-death ratio |
 | `damage_round`  | Quantitative | Average damage dealt per round |
-| `clutches`      | Quantitative | Number of clutch rounds won |
 
-- **Quantitative Features**: 3  
+- **Quantitative Features**: 2  
 - **Ordinal Features**: 0  
 - **Nominal Features**: 0  
 
-Since all selected features were numerical, no categorical encodings were necessary for this baseline model.
+All features were numerical, so no categorical encoding was required for this baseline model.
 
 ### Evaluation
 
-We split the dataset using an 80/20 train-test split and used stratification to maintain class distribution. The model's performance was evaluated using precision, recall, and F1-score.
+We split the dataset into an 80/20 training and testing split, using stratification to maintain the class distribution. The model's performance was evaluated using precision, recall, and F1-score.
 
 Below is the classification report from the baseline model:
 
@@ -258,20 +257,18 @@ Below is the classification report from the baseline model:
               precision    recall  f1-score   support
 
     Immortal       0.97      1.00      0.98     16594
-     Radiant       0.10      0.00      0.01       521
+     Radiant       0.00      0.00      0.00       521
 
     accuracy                           0.97     17115
-   macro avg       0.53      0.50      0.50     17115
+   macro avg       0.48      0.50      0.49     17115
 weighted avg       0.94      0.97      0.95     17115
 
 ```
 
 
-
-
 ### Model Assessment
 
-While this logistic regression model is relatively simple, it provides a solid foundation for comparison. It captures some performance-based differences between Radiants and Immortals but likely misses complex nonlinear interactions or interactions involving other metrics. Therefore, we view this as a **good baseline**, but **not sufficient for high predictive accuracy**. It serves as a point of comparison for future improvements in the final model.
+This logistic regression model offers a simple and interpretable baseline. While it achieves high overall accuracy (due to the imbalance in class labels), it fails to effectively identify **Radiant** players — yielding zero recall and F1-score for that class. This demonstrates the need for more sophisticated feature engineering and class imbalance handling in our final model. Despite its limitations, this baseline serves as a useful point of reference for comparison.
 
 
 
